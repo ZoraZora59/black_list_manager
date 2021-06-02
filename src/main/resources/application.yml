@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: blacklist-manager
+server:
+  servlet:
+    context-path: /api
+  port: 34215
