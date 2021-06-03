@@ -15,7 +15,7 @@ public class ExcelModel {
     private Integer id;
     private String name;
     private String address;
-    private String reason;
     private String business;
+    private String reason;
     private String firstComment;
 }
