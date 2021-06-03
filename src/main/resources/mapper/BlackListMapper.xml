@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zora.opensource.black.list.manager.repository.IBlackListRepo">
+
+
+    <update id="upsert">
+        INSERT INTO black_list_company(id, name, address, business, reason, comments)
+            VALUE (#{info.id},#{info.name},#{info.address},#{info.business}#{info.reason},#{info.comments})
+        ON DUPLICATE KEY
+        UPDATE name=#{info.name} , address=#{info.address},
+    </update>
+    <delete id="delete">
+        DELETE black_list_company WHERE id in
+        <foreach collection="idList" item="id" index="index"
+                 open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+    <select id="select" resultType="com.zora.opensource.black.list.manager.model.BlackCompanyInfoEntity">
+        SELECT * FROM black_list_company
+        <where>
+            <if test="filterKeyword != null">
+                <bind name="pattern" value="'%' + filterKeyword + '%'"/>
+                name LIKE #{pattern}
+            </if>
+        </where>
+    </select>
+</mapper>

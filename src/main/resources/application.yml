@@ -1,7 +1,14 @@
 spring:
   application:
     name: blacklist-manager
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://myserver:3306/black_list_company?useSSL=false&serverTimezone=UTC
+    data-username: black_list_manager
+    data-password: blmgithub
 server:
   servlet:
     context-path: /api
   port: 34215
+mybatis:
+  mapperLocations: classpath:mapper/*.xml

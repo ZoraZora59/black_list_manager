@@ -1,6 +1,6 @@
 package com.zora.opensource.black.list.manager.controller;
 
-import com.zora.opensource.black.list.manager.model.BlackCompanyInfo;
+import com.zora.opensource.black.list.manager.model.BlackCompanyInfoEntity;
 import com.zora.opensource.black.list.manager.repository.IBlackListRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletResponse;
 import java.util.Collections;
 import java.util.List;
 
@@ -30,23 +28,23 @@ public class InputController {
     private IBlackListRepo blackListRepo;
 
     @GetMapping("/")
-    public ResponseEntity<List<BlackCompanyInfo>> getBlackList(@RequestParam(required = false) String keyword) {
+    public ResponseEntity<List<BlackCompanyInfoEntity>> getBlackList(@RequestParam(required = false) String keyword) {
         try {
-            List<BlackCompanyInfo> repoResult = blackListRepo.select(keyword);
+            List<BlackCompanyInfoEntity> repoResult = blackListRepo.select(keyword);
             return ResponseEntity.ok(repoResult);
-        }catch (Exception ex){
-            log.error("select fail",ex);
+        } catch (Exception ex) {
+            log.error("select fail", ex);
             return ResponseEntity.status(500).body(Collections.emptyList());
         }
     }
 
     @PostMapping("/")
-    public ResponseEntity<Integer> updateOne(@RequestParam BlackCompanyInfo info) {
+    public ResponseEntity<Integer> updateOne(@RequestParam BlackCompanyInfoEntity info) {
         try {
-            Integer rows= blackListRepo.upsert(info);
+            Integer rows = blackListRepo.upsert(info);
             return ResponseEntity.ok(rows);
-        }catch (Exception ex){
-            log.error("upsert fail",ex);
+        } catch (Exception ex) {
+            log.error("upsert fail", ex);
             return ResponseEntity.status(500).body(0);
         }
     }

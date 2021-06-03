@@ -2,8 +2,6 @@ package com.zora.opensource.black.list.manager.model;
 
 import lombok.Data;
 
-import java.util.List;
-
 /**
  * <h3>black_list_manager</h3>
  * <h4>com.zora.opensource.black.list.manager.model</h4>
@@ -13,11 +11,11 @@ import java.util.List;
  * @since 2021.06.02
  */
 @Data
-public class BlackCompanyInfo {
+public class BlackCompanyInfoEntity {
     private Integer id;
     private String name;
     private String address;
     private String business;
     private String reason;
-    private List<String> comments;
+    private String comments;
 }
