@@ -8,10 +8,7 @@ import com.zora.opensource.black.list.manager.repository.IBlackListRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,7 +23,7 @@ import java.util.List;
  * @since 2021.06.02
  */
 @Slf4j
-@RestController("/blacklist")
+@RestController
 public class InputController {
     @Autowired
     private IBlackListRepo blackListRepo;
@@ -55,7 +52,8 @@ public class InputController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Integer> updateOne(@RequestParam BlackCompanyInfoDTO info) {
+    public ResponseEntity<Integer> updateOne(@RequestBody BlackCompanyInfoDTO info) {
+        log.info("receive update request:{}", info.toString());
         try {
             BlackCompanyInfoEntity entity = new BlackCompanyInfoEntity();
             entity.setId(info.getId());
