@@ -54,7 +54,7 @@ public class ExcelReader {
                 dto.setName(excelModel.getName());
                 dto.setAddress(excelModel.getAddress());
                 dto.setBusiness(excelModel.getBusiness());
-                dto.setReason(excelModel.getName());
+                dto.setReason(excelModel.getReason());
                 dto.setComments(Collections.singletonList(excelModel.getFirstComment()));
                 httpPost.setHeader("Content-Type", "application/json;charset=utf8");
                 httpPost.setEntity(new StringEntity(JSONObject.toJSONString(dto), "UTF-8"));
