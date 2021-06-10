@@ -19,7 +19,7 @@
     <select id="select" resultType="com.zora.opensource.black.list.manager.model.BlackCompanyInfoEntity">
         SELECT * FROM black_list_company
         <where>
-            <if test="filterKeyword != null">
+            <if test="filterKeyword != null and filterKeyword != ''">
                 <bind name="pattern" value="'%' + filterKeyword + '%'"/>
                 name LIKE #{pattern}
             </if>

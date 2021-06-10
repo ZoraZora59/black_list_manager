@@ -1,6 +1,7 @@
 package com.zora.opensource.black.list.manager.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
 
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
  * @author Yuhan.Ji
  * @since 2021.06.03
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class BlackCompanyInfoVO extends BlackCompanyInfoDTO {
     private LocalDateTime updateTime;

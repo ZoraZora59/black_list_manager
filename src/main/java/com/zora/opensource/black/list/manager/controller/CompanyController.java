@@ -6,6 +6,7 @@ import com.zora.opensource.black.list.manager.model.BlackCompanyInfoEntity;
 import com.zora.opensource.black.list.manager.model.BlackCompanyInfoVO;
 import com.zora.opensource.black.list.manager.repository.IBlackListRepo;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,12 +25,16 @@ import java.util.List;
  */
 @Slf4j
 @RestController
-public class InputController {
+public class CompanyController {
+    private static final String BATCH = "batch";
     @Autowired
     private IBlackListRepo blackListRepo;
 
-    @GetMapping("/")
-    public ResponseEntity<List<BlackCompanyInfoVO>> getBlackList(@RequestParam(required = false) String keyword) {
+    @GetMapping("/company/{keyword}")
+    public ResponseEntity<List<BlackCompanyInfoVO>> getBlackList(@PathVariable(required = false) String keyword) {
+        if (Strings.isNotBlank(keyword) && keyword.equals(BATCH)) {
+            keyword = null;
+        }
         try {
             List<BlackCompanyInfoEntity> repoResult = blackListRepo.select(keyword);
             List<BlackCompanyInfoVO> voList = new ArrayList<>(repoResult.size());
@@ -51,7 +56,7 @@ public class InputController {
         }
     }
 
-    @PostMapping("/")
+    @PostMapping("/company")
     public ResponseEntity<Integer> updateOne(@RequestBody BlackCompanyInfoDTO info) {
         log.info("receive update request:{}", info.toString());
         try {
