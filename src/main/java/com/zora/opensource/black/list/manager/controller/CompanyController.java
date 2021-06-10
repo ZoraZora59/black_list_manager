@@ -30,7 +30,7 @@ public class CompanyController {
     @Autowired
     private IBlackListRepo blackListRepo;
 
-    @GetMapping("/company/{keyword}")
+    @GetMapping(path = {"/company/{keyword}", "/company"})
     public ResponseEntity<List<BlackCompanyInfoVO>> getBlackList(@PathVariable(required = false) String keyword) {
         if (Strings.isNotBlank(keyword) && keyword.equals(BATCH)) {
             keyword = null;
